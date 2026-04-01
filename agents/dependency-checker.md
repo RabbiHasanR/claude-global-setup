@@ -53,7 +53,12 @@ Check for:
 
 3. **Unused dependencies** — check `package.json`/`pyproject.toml` declared deps against actual imports in source files using grep; flag declared but never imported
 
-4. **Version conflicts** — peer dependency warnings, incompatible version ranges between packages
+4. **Version conflicts & compatibility**
+   - Peer dependency warnings, incompatible version ranges between packages
+   - Packages where the latest version is incompatible with other deps in the project — report the latest *compatible* version instead of blindly suggesting latest
+   - Transitive dependency conflicts — two packages requiring incompatible versions of a shared dep
+   - Packages pinned to an older version intentionally due to a known breaking change — detect this by checking if the pinned version is significantly behind latest and note "may be intentionally pinned"
+   - Breaking changes in available upgrades — flag major version bumps and note what's known to break (e.g. requires Node 20+, drops Python 3.8 support, renamed APIs)
 
 5. **License issues** — flag any dependency with a license incompatible with commercial use (GPL in a proprietary project, AGPL, SSPL, etc.); note unknown licenses
 
