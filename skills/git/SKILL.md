@@ -1,6 +1,6 @@
 ---
 name: git
-description: Git workflows — commit, branch, PR, conflict resolution, init, remote, stash, undo, sync, tag, push. Use when performing any git operation.
+description: Git workflows — commit, branch, PR, conflict resolution, init, remote, stash, undo, sync, tag, push, review. Use when performing any git operation.
 ---
 
 Handle git operation based on $ARGUMENTS:
@@ -147,6 +147,27 @@ Sub-commands based on argument:
 3. Write appropriate `.gitignore`
 4. Create initial commit: `chore: initial commit`
 5. Ask if user wants to add a remote — if yes, follow `remote` flow
+
+---
+
+## review
+Review only the current diff — staged changes, a PR branch, or a specific commit. Scope is the delta, not the whole codebase.
+
+1. Determine what to review:
+   - No argument: `git diff DEFAULT_BRANCH...HEAD` (current branch vs base)
+   - Staged only: `git diff --cached`
+   - Specific commit: `git show <ref>`
+2. Read the changed files at the affected lines for full context
+3. Report findings grouped by category:
+   - **Correctness** — logic errors, off-by-one, wrong conditions, missing cases
+   - **Security** — any input reaching DB/shell/template unvalidated, secrets, missing auth
+   - **Breaking changes** — API changes, removed exports, schema changes without migration
+   - **Code quality** — DRY violations, unclear naming, missing type annotations, dead code
+   - **Tests** — changed logic with no corresponding test update
+4. For each finding: file + line, what's wrong, recommended fix (one sentence)
+5. End with: overall verdict — **Approve** / **Approve with minor comments** / **Request changes**
+
+Rules: review the diff, not existing code. Don't flag pre-existing issues outside the changed lines. Be specific — no generic advice.
 
 ---
 
