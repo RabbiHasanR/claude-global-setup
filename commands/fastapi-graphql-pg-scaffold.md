@@ -1674,7 +1674,6 @@ Review the files or modules provided and report every violation with its exact l
 ### All Files
 
 - [ ] Uses `from app.core.config import settings` — no `os.environ` anywhere
-- [ ] No hardcoded credentials, API keys, or connection strings
 
 ## Report Format
 
