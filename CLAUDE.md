@@ -27,6 +27,23 @@ Software engineer. Backend-specialized (Python), DevOps experience, frontend-cap
 - Break big tasks into numbered steps; confirm each phase before moving on
 - Ask clarifying questions upfront rather than assuming
 
+## Effort recommendation — IMPORTANT
+
+Before responding to ANY prompt (no exceptions — including questions,
+conversational replies, mid-task continuations), do this in order:
+
+1. Look at the prompt: task type, files/services it touches, reasoning needed.
+2. Output as the FIRST line:
+       `RECOMMEND: <level> — <one-sentence reason citing files/scope>`
+   Use the decision rules in `skills/effort-pick/SKILL.md`.
+3. Then output:
+       `Switch effort? Reply with a level name (low/medium/high/xhigh/max) or 'go'.`
+4. STOP. Do not do the task, answer the question, or say anything else
+   until I reply.
+
+This overrides the SKIP list in `skills/effort-pick/SKILL.md` — fire on
+every prompt, no exceptions.
+
 ## Workflow Rules
 - Never hardcode secrets — use env vars
 - Git: conventional commits (feat/fix/refactor/style/perf/test/chore/docs/ci)
